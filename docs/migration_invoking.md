@@ -44,16 +44,17 @@ site being migrated. It can be connected to as needed by
    [`kubectl` context][drupal-container-config] at the site being migrated:
     `kubectl config set-context --current --namespace={site}`
 2. Ensure the data is readable: 
-   `kubectl exec deployments/drupal -- /bin/bash -c "sudo -Eu www-data drush php:eval \"var_dump(is_readable('foxml://object/{a:pid}'))\""`
+   `kubectl exec deployments/drupal -- /bin/bash -c "drush php:eval \"var_dump(is_readable('foxml://object/{a:pid}'))\""`
    where `a:pid` is an object that exists in the dataset (e.g. `twu:180`).
    This will return `TRUE` if the data exists and is readable; `FALSE` otherwise.
 
 ### Ensure the migration config split is enabled and imported
 
-1. From the [Drupal container][drupal-server] get a shell.
-2. Ensure the migration config split is active.<br />
+1. Shell into the Drupal container:
+    -  
+3. Ensure the migration config split is active.<br />
    `drush config-split:status-override migration active`
-3. Import the config split to ensure it takes effect.<br />
+4. Import the config split to ensure it takes effect.<br />
    `drush config-split:import migration`
 
 ### Disable entity_hierarchy rewriting
