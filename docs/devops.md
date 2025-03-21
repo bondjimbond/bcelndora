@@ -260,7 +260,9 @@ To change a site's URL:
     ```
 3. Run `./scripts/update-all.sh [namespace]`
     - If you don't want to fully update Drupal, choose `s` for when the Drupal update question arises.
-4. Reindex Solr
+4. Reindex Solr:
+    -  At `/admin/config/search/search-api/index/default_solr_index`, queue all items for reindexing
+    -  In the shell, start the re-index: `drush --uri=$DRUSH_OPTIONS_URI search-api:index default_solr_index`
 5. Wait. It will take some time for the new certificates to be generated.
 
 # Troubleshooting
